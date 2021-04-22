@@ -21,11 +21,15 @@ public class HomeActivity extends AppCompatActivity {
         search = findViewById(R.id.search);
         createAlbum = findViewById(R.id.createAlbum);
 
+        //loads all albums;
+
 
     }
 
     public void searchOnClick(View view){
         startActivity(new Intent(this, SearchActivity.class));
     }
+
+
 
 }
