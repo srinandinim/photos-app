@@ -24,6 +24,15 @@ public class Photo implements Serializable {
         tags.put("person",  new ArrayList<String>());
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Photo))
+            return false;
+
+        return file.equals(((Photo) obj).getFile());
+    }
+
+
     public boolean addTag(String key, String value) {
         key = key.trim();
         value = value.trim();
@@ -59,6 +68,10 @@ public class Photo implements Serializable {
 
     public Map<String, List<String>> getTags() {
         return tags;
+    }
+
+    public File getFile(){
+        return file;
     }
 
 }
