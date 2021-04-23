@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -33,8 +34,12 @@ public class HomeActivity extends AppCompatActivity {
     private static final String storeDir = "../../res"+ File.separator +"raw";
     private static final String storeFile = "SerializedData.dat";
 
-    ImageButton search, createAlbum;
+    // private final String pathToAppFolder = getExternalFilesDir(null).getAbsolutePath();
+    // private final String filePath = pathToAppFolder + File.separator  + "list.ser";
 
+    GridView gridView;
+
+    AlbumsAdapter albumsAdapter;
     List<Album> albumList;
 
     @Override
@@ -42,17 +47,15 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        search = findViewById(R.id.search);
-        createAlbum = findViewById(R.id.createAlbum);
+        // deserialize();
+        albumList = new ArrayList<>();
+        for (int i = 0; i < 5; i++)
+            albumList.add(new Album("temp"));
 
-        deserialize();
-        //albumList = new ArrayList<>();
-        //loads all albums;
-
-
+        gridView = findViewById(R.id.gridview);
+        albumsAdapter = new AlbumsAdapter(this, albumList);
+        gridView.setAdapter(albumsAdapter);
     }
-
-
 
     public void searchOnClick(View view){
         startActivity(new Intent(this, SearchActivity.class));
@@ -69,9 +72,9 @@ public class HomeActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         if (!containsAlbum(input.getText().toString().trim())){
                             albumList.add(new Album(input.getText().toString()));
-                            System.out.println("asdf");
+                            albumsAdapter.notifyDataSetChanged();
+
                             serialize();
-                            //TODO: update grid pane
                         } else{
                             Toast.makeText(HomeActivity.this, "Invalid Album Name", Toast.LENGTH_SHORT).show();
                         }
@@ -97,15 +100,9 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void serialize() {
-        //System.out.println("OUT");
-        String pathToAppFolder = getExternalFilesDir(null).getAbsolutePath();
-        String filePath = pathToAppFolder + File.separator + "list.ser";
-
         try {
-            //System.out.println(storeDir + File.separator + storeFile);
-            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filePath));
-            System.out.println(filePath);
-
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(storeDir + File.separator + storeFile));
+            // System.out.println(filePath);
             oos.writeObject(albumList);
             oos.close();
         } catch (IOException e) {
@@ -120,11 +117,11 @@ public class HomeActivity extends AppCompatActivity {
             albumList = (List<Album>) ois.readObject();
             ois.close();
         } catch (ClassNotFoundException | IOException e) {
+            e.printStackTrace();
             albumList = new ArrayList<>();
         }
 
     }
-
 
 
 }
