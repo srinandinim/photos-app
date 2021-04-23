@@ -3,15 +3,14 @@ package com.example.photos;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,14 +51,26 @@ public class AlbumsAdapter extends BaseAdapter {
         }
 
         ImageView albumCover = convertView.findViewById(R.id.albumCover);
-        TextView albumName = convertView.findViewById(R.id.albumName);
+        TextView albumName = convertView.findViewById(R.id.photoName);
         ImageButton rename = convertView.findViewById(R.id.editButton);
         ImageButton delete = convertView.findViewById(R.id.deleteButton);
 
         if (album.getSize() == 0){
             albumCover.setImageResource(R.drawable.noimageavailable);
             //TODO: fix image scaling
+        } else {
+            //TODO: image
         }
+
+        albumCover.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, AlbumActivity.class);
+                intent.putExtra("CurrentAlbum", album);
+                mContext.startActivity(intent);
+            }
+        });
+
         albumName.setText(album.getName());
 
         rename.setOnClickListener(new View.OnClickListener() {

@@ -44,6 +44,8 @@ public class Album implements Serializable {
         return photoList.size();
     }
 
+    public List<Photo> getPhotoList() { return photoList; }
+
     public String toString() {
         return name;
     }
