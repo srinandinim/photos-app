@@ -1,6 +1,8 @@
 package com.example.photos;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +40,7 @@ public class PhotosAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final Photo album = photos.get(position);
+        final Photo photo = photos.get(position);
 
         if (convertView == null) {
             final LayoutInflater layoutInflater = LayoutInflater.from(mContext);
@@ -49,7 +51,17 @@ public class PhotosAdapter extends BaseAdapter {
         TextView photoName = convertView.findViewById(R.id.photoName);
         ImageButton delete = convertView.findViewById(R.id.deleteButton);
 
-        photoName.setText("ji");
+        photoImage.setImageURI(photo.getUri()); //TODO: Scale image
+        photoName.setText(photo.getName());
+
+        final int arrPosition = position;
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                photos.remove(arrPosition);
+                notifyDataSetChanged();
+            }
+        });
 
         return convertView;
     }

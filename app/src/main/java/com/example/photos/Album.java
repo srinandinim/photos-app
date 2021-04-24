@@ -17,7 +17,7 @@ public class Album implements Serializable {
     }
 
     public boolean addPhoto(Photo newPhoto) {
-        photoList.add(newPhoto);
+        photoList.add(newPhoto); //TODO: only add non-duplicate, make a set maybe
         return true;
     }
 

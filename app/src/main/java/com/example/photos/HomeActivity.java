@@ -110,7 +110,6 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
-    @SuppressWarnings("unchecked")
     public void deserialize() {
         try {
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream(storeDir + File.separator + storeFile));

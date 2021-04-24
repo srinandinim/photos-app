@@ -1,13 +1,17 @@
 package com.example.photos;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.GridView;
 
+import java.io.File;
 import java.util.List;
 
 public class AlbumActivity extends AppCompatActivity {
@@ -17,6 +21,8 @@ public class AlbumActivity extends AppCompatActivity {
 
     GridView gridview;
     PhotosAdapter photosAdapter;
+
+    final int PICK_IMAGE = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +39,20 @@ public class AlbumActivity extends AppCompatActivity {
     }
 
     public void addPhotoOnClick(View view){
-        Intent galleryIntent = new Intent(Intent.ACTION_PICK,
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         galleryIntent.setType("image/*");
-        startActivityForResult(galleryIntent, 3);
+        startActivityForResult(galleryIntent, PICK_IMAGE);
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == Activity.RESULT_OK && requestCode == PICK_IMAGE){
+            currentAlbum.addPhoto(new Photo(data.getData()));
+            photosAdapter.notifyDataSetChanged();
+        }
 
     }
 

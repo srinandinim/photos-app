@@ -1,5 +1,7 @@
 package com.example.photos;
 
+import android.net.Uri;
+
 import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -14,9 +16,11 @@ public class Photo implements Serializable {
     private String name;
     private File file;
     private Map<String, List<String>> tags;
+    private Uri uri;
 
-    public Photo(File file) {
-        this.file = file;
+    public Photo(Uri uri) {
+        this.uri = uri;
+        file = new File(uri.getPath());
         name = file.getName();
         tags = new HashMap<>();
 
@@ -29,7 +33,7 @@ public class Photo implements Serializable {
         if (!(obj instanceof Photo))
             return false;
 
-        return file.equals(((Photo) obj).getFile());
+        return file.equals(((Photo) obj).getFile()); //TODO: check might be different cause URI
     }
 
 
@@ -73,5 +77,7 @@ public class Photo implements Serializable {
     public File getFile(){
         return file;
     }
+
+    public Uri getUri(){ return uri; }
 
 }
