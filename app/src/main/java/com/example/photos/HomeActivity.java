@@ -58,7 +58,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void searchOnClick(View view){
-        startActivity(new Intent(this, SearchActivity.class));
+        startActivity(new Intent(this, EditPhotoActivity.class));
     }
 
     public void createOnClick(View view){

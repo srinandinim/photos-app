@@ -61,4 +61,8 @@ public class AlbumActivity extends AppCompatActivity {
 
     }
 
+    public void backOnClick(View view){
+        startActivity(new Intent(this, HomeActivity.class));
+    }
+
 }
