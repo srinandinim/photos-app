@@ -16,6 +16,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.List;
 
+import adapters.SearchPhotosAdapter;
+import models.Album;
+import models.Photo;
+
 public class SearchActivity extends AppCompatActivity {
 
     Spinner searchTag1, searchTag2;

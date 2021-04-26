@@ -1,4 +1,4 @@
-package com.example.photos;
+package adapters;
 
 import android.content.Context;
 import android.net.Uri;
@@ -9,7 +9,11 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.photos.R;
+
 import java.util.List;
+
+import models.Photo;
 
 public class SearchPhotosAdapter extends BaseAdapter {
 

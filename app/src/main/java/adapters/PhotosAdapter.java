@@ -1,4 +1,4 @@
-package com.example.photos;
+package adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,8 +11,14 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.photos.EditPhotoActivity;
+import com.example.photos.R;
+
 import java.io.Serializable;
 import java.util.List;
+
+import models.Album;
+import models.Photo;
 
 public class PhotosAdapter extends BaseAdapter {
 

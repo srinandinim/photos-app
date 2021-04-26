@@ -12,6 +12,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.List;
 
+import adapters.PhotosAdapter;
+import models.Album;
+import models.Photo;
+
 public class AlbumActivity extends AppCompatActivity {
 
     Album currentAlbum;

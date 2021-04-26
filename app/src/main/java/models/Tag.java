@@ -1,8 +1,8 @@
-package com.example.photos;
+package models;
 
 import java.io.Serializable;
 
-public class Tag implements Serializable {
+public class Tag implements Serializable, Comparable<Tag> {
 
     private String key;
     private String value;
@@ -23,5 +23,13 @@ public class Tag implements Serializable {
     @Override
     public String toString(){
         return key + " " + value;
+    }
+
+    @Override
+    public int compareTo(Tag tag) {
+        if (!key.equals(tag.getKey())){
+            return key.compareTo(tag.getKey());
+        }
+        return value.compareTo(tag.getValue());
     }
 }

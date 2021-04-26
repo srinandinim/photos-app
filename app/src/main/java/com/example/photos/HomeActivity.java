@@ -19,6 +19,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
+import adapters.AlbumsAdapter;
+import models.Album;
+
 public class HomeActivity extends AppCompatActivity {
 
     private static final String storeDir = "../../res" + File.separator + "raw";

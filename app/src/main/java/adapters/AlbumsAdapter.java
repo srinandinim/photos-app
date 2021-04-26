@@ -1,4 +1,4 @@
-package com.example.photos;
+package adapters;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -14,8 +14,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.photos.AlbumActivity;
+import com.example.photos.R;
+
 import java.io.Serializable;
 import java.util.List;
+
+import models.Album;
 
 public class AlbumsAdapter extends BaseAdapter {
 

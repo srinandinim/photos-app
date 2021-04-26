@@ -19,6 +19,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.Serializable;
 
+import adapters.TagAdapter;
+import models.Album;
+import models.Photo;
+
 public class EditPhotoActivity extends AppCompatActivity {
 
     Photo currentPhoto;
