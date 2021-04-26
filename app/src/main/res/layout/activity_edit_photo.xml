@@ -121,7 +121,7 @@
         app:srcCompat="@drawable/abc_vector_test" />
 
     <TextView
-        android:id="@+id/tagTag"
+        android:id="@+id/tagLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Tag"
@@ -133,7 +133,7 @@
         app:layout_constraintVertical_bias="0.538" />
 
     <TextView
-        android:id="@+id/valueValue"
+        android:id="@+id/valLabel"
         android:layout_width="39dp"
         android:layout_height="15dp"
         android:text="Value"
