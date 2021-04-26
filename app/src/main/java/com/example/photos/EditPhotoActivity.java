@@ -31,8 +31,6 @@ public class EditPhotoActivity extends AppCompatActivity {
         photoName.setText(currentPhoto.getName());
 
         listView = findViewById(R.id.listView);
-        
-
 
     }
 
