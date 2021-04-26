@@ -24,8 +24,8 @@ public class Photo implements Serializable {
         name = file.getName();
         tags = new HashMap<>();
 
-        tags.put("location",  new ArrayList<String>());
-        tags.put("person",  new ArrayList<String>());
+        tags.put("location", new ArrayList<String>());
+        tags.put("person", new ArrayList<String>());
     }
 
     @Override
@@ -41,7 +41,7 @@ public class Photo implements Serializable {
         key = key.trim();
         value = value.trim();
 
-        for (String existingValue: tags.get(key)) {
+        for (String existingValue : tags.get(key)) {
             if (value.toLowerCase().equals(existingValue.toLowerCase()))
                 return false;
         }
@@ -57,7 +57,7 @@ public class Photo implements Serializable {
 
         for (int i = 0; i < tags.get(key).size(); i++) {
             String existingValue = tags.get(key).get(i);
-            if (value.toLowerCase().equals(existingValue.toLowerCase())){
+            if (value.toLowerCase().equals(existingValue.toLowerCase())) {
                 tags.get(key).remove(i);
                 return true;
             }
@@ -66,7 +66,7 @@ public class Photo implements Serializable {
         return false;
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
@@ -74,10 +74,12 @@ public class Photo implements Serializable {
         return tags;
     }
 
-    public File getFile(){
+    public File getFile() {
         return file;
     }
 
-    public Uri getUri(){ return uri; }
+    public Uri getUri() {
+        return uri;
+    }
 
 }

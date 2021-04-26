@@ -11,7 +11,7 @@ public class Album implements Serializable {
     private String name;
     private List<Photo> photoList;
 
-    public Album(String name){
+    public Album(String name) {
         this.name = name;
         photoList = new ArrayList<>();
     }
@@ -44,7 +44,9 @@ public class Album implements Serializable {
         return photoList.size();
     }
 
-    public List<Photo> getPhotoList() { return photoList; }
+    public List<Photo> getPhotoList() {
+        return photoList;
+    }
 
     public String toString() {
         return name;

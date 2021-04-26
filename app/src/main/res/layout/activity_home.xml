@@ -8,8 +8,8 @@
 
     <GridView
         android:id="@+id/gridview"
-        android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_width="390dp"
+        android:layout_height="448dp"
         android:columnWidth="100dp"
         android:gravity="center"
         android:horizontalSpacing="10dp"
@@ -18,10 +18,10 @@
         android:verticalSpacing="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.476"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.155" />
+        app:layout_constraintVertical_bias="0.206" />
 
     <ImageButton
         android:id="@+id/search"

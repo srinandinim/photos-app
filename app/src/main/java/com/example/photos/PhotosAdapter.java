@@ -1,8 +1,7 @@
 package com.example.photos;
 
 import android.content.Context;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,6 +51,15 @@ public class PhotosAdapter extends BaseAdapter {
         ImageButton delete = convertView.findViewById(R.id.deleteButton);
 
         photoImage.setImageURI(photo.getUri()); //TODO: Scale image
+        photoImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, SearchActivity.class);
+                intent.putExtra("CurrentPhoto", photo);
+                mContext.startActivity(intent);
+            }
+        });
+
         photoName.setText(photo.getName());
 
         final int arrPosition = position;

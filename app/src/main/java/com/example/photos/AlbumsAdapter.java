@@ -55,7 +55,7 @@ public class AlbumsAdapter extends BaseAdapter {
         ImageButton rename = convertView.findViewById(R.id.editButton);
         ImageButton delete = convertView.findViewById(R.id.deleteButton);
 
-        if (album.getSize() == 0){
+        if (album.getSize() == 0) {
             albumCover.setImageResource(R.drawable.noimageavailable);
             //TODO: fix image scaling
         } else {
@@ -76,7 +76,7 @@ public class AlbumsAdapter extends BaseAdapter {
         rename.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final EditText input = new EditText( mContext );
+                final EditText input = new EditText(mContext);
 
                 AlertDialog dialog = (new AlertDialog.Builder(mContext))
                         .setTitle("Rename Album")
@@ -84,18 +84,18 @@ public class AlbumsAdapter extends BaseAdapter {
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                if (!containsAlbum(input.getText().toString().trim())){
+                                if (!containsAlbum(input.getText().toString().trim())) {
                                     album.setName(input.getText().toString());
                                     notifyDataSetChanged();
-                                } else{
-                                    Toast.makeText(mContext,"Invalid Album Name", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(mContext, "Invalid Album Name", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         })
                         .setNegativeButton("Cancel", null)
                         .create();
 
-                dialog.setView(input, 40,0, 40,0 );
+                dialog.setView(input, 40, 0, 40, 0);
                 dialog.show();
             }
         });
@@ -112,11 +112,11 @@ public class AlbumsAdapter extends BaseAdapter {
         return convertView;
     }
 
-    private boolean containsAlbum(String name){
+    private boolean containsAlbum(String name) {
         if (name == null || name.isEmpty())
             return true;
 
-        for (Album currAlbum: albums){
+        for (Album currAlbum : albums) {
             if (currAlbum.getName().toLowerCase().equals(name.toLowerCase()))
                 return true;
         }
