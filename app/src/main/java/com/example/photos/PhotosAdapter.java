@@ -2,6 +2,7 @@ package com.example.photos;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,10 +16,12 @@ import java.util.List;
 public class PhotosAdapter extends BaseAdapter {
 
     private final Context mContext;
+    private final Album currentAlbum;
     private final List<Photo> photos;
 
-    public PhotosAdapter(Context context, List<Photo> photos) {
+    public PhotosAdapter(Context context, Album currentAlbum, List<Photo> photos) {
         this.mContext = context;
+        this.currentAlbum = currentAlbum;
         this.photos = photos;
     }
 
@@ -48,14 +51,15 @@ public class PhotosAdapter extends BaseAdapter {
 
         ImageView photoImage = convertView.findViewById(R.id.photoImage);
         TextView photoName = convertView.findViewById(R.id.photoName);
-        ImageButton delete = convertView.findViewById(R.id.deleteButton);
+        ImageButton delete = convertView.findViewById(R.id.photoDelete);
 
-        photoImage.setImageURI(photo.getUri()); //TODO: Scale image
+        photoImage.setImageURI(Uri.parse(photo.getUriString())); //TODO: Scale image
         photoImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(mContext, SearchActivity.class);
+                Intent intent = new Intent(mContext, EditPhotoActivity.class);
                 intent.putExtra("CurrentPhoto", photo);
+                intent.putExtra("CurrentAlbum", currentAlbum);
                 mContext.startActivity(intent);
             }
         });

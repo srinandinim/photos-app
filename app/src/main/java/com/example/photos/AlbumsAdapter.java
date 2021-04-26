@@ -51,9 +51,9 @@ public class AlbumsAdapter extends BaseAdapter {
         }
 
         ImageView albumCover = convertView.findViewById(R.id.albumCover);
-        TextView albumName = convertView.findViewById(R.id.photoName);
-        ImageButton rename = convertView.findViewById(R.id.editButton);
-        ImageButton delete = convertView.findViewById(R.id.deleteButton);
+        TextView albumName = convertView.findViewById(R.id.albumName);
+        ImageButton rename = convertView.findViewById(R.id.albumEdit);
+        ImageButton delete = convertView.findViewById(R.id.albumDelete);
 
         if (album.getSize() == 0) {
             albumCover.setImageResource(R.drawable.noimageavailable);

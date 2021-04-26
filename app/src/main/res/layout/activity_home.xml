@@ -7,7 +7,7 @@
     tools:context=".HomeActivity">
 
     <GridView
-        android:id="@+id/gridview"
+        android:id="@+id/albumGrid"
         android:layout_width="390dp"
         android:layout_height="448dp"
         android:columnWidth="100dp"
@@ -24,7 +24,7 @@
         app:layout_constraintVertical_bias="0.206" />
 
     <ImageButton
-        android:id="@+id/search"
+        android:id="@+id/searchScreen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="searchOnClick"
@@ -38,7 +38,7 @@
         tools:src="@android:drawable/ic_menu_search" />
 
     <ImageButton
-        android:id="@+id/createAlbum"
+        android:id="@+id/createNewAlbum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="createOnClick"

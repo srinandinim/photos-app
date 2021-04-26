@@ -7,7 +7,7 @@
     tools:context=".AlbumActivity">
 
     <GridView
-        android:id="@+id/gridview"
+        android:id="@+id/photosGrid"
         android:layout_width="360dp"
         android:layout_height="441dp"
         android:columnWidth="100dp"
@@ -26,7 +26,7 @@
     </GridView>
 
     <ImageButton
-        android:id="@+id/back"
+        android:id="@+id/backHome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="backOnClick"
@@ -52,7 +52,7 @@
         tools:src="@android:drawable/ic_menu_add" />
 
     <ImageButton
-        android:id="@+id/slideshow"
+        android:id="@+id/slideshowScreen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="slideshowOnClick"

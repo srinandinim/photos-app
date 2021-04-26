@@ -30,8 +30,8 @@ public class AlbumActivity extends AppCompatActivity {
         currentAlbum = (Album) getIntent().getSerializableExtra("CurrentAlbum");
         photoList = currentAlbum.getPhotoList();
 
-        gridview = findViewById(R.id.gridview);
-        photosAdapter = new PhotosAdapter(this, photoList);
+        gridview = findViewById(R.id.photosGrid);
+        photosAdapter = new PhotosAdapter(this, currentAlbum, photoList);
         gridview.setAdapter(photosAdapter);
 
     }
@@ -40,7 +40,6 @@ public class AlbumActivity extends AppCompatActivity {
         Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         galleryIntent.setType("image/*");
         startActivityForResult(galleryIntent, PICK_IMAGE);
-
     }
 
     @Override

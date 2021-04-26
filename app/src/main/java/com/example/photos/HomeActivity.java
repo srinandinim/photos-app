@@ -28,7 +28,7 @@ public class HomeActivity extends AppCompatActivity {
     // private final String pathToAppFolder = getExternalFilesDir(null).getAbsolutePath();
     // private final String filePath = pathToAppFolder + File.separator  + "list.ser";
 
-    GridView gridView;
+    GridView albumGrid;
 
     AlbumsAdapter albumsAdapter;
     List<Album> albumList;
@@ -41,11 +41,11 @@ public class HomeActivity extends AppCompatActivity {
         // deserialize();
         albumList = new ArrayList<>();
         for (int i = 0; i < 5; i++)
-            albumList.add(new Album("temp"));
+            albumList.add(new Album("temp" + i));
 
-        gridView = findViewById(R.id.gridview);
+        albumGrid = findViewById(R.id.albumGrid);
         albumsAdapter = new AlbumsAdapter(this, albumList);
-        gridView.setAdapter(albumsAdapter);
+        albumGrid.setAdapter(albumsAdapter);
     }
 
     public void searchOnClick(View view) {

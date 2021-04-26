@@ -20,7 +20,7 @@
     </FrameLayout>
 
     <TextView
-        android:id="@+id/photoName"
+        android:id="@+id/albumName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
@@ -37,14 +37,14 @@
         android:orientation="horizontal">
 
         <ImageButton
-            android:id="@+id/editButton"
+            android:id="@+id/albumEdit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             app:srcCompat="@android:drawable/ic_menu_edit" />
 
         <ImageButton
-            android:id="@+id/deleteButton"
+            android:id="@+id/albumDelete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
