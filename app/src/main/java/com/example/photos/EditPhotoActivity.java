@@ -17,6 +17,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.Serializable;
+
 public class EditPhotoActivity extends AppCompatActivity {
 
     Photo currentPhoto;
@@ -118,7 +120,7 @@ public class EditPhotoActivity extends AppCompatActivity {
 
     public void backOnClick(View view) {
         Intent intent = new Intent(this, AlbumActivity.class);
-        intent.putExtra("CurrentAlbum", currentAlbum);
+        intent.putExtra("CurrentAlbum", (Serializable) currentAlbum);
         startActivity(intent);
     }
 }

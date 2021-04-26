@@ -18,7 +18,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -31,7 +30,7 @@ public class HomeActivity extends AppCompatActivity {
     GridView albumGrid;
 
     AlbumsAdapter albumsAdapter;
-    List<Album> albumList;
+    ArrayList<Album> albumList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +48,11 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void searchOnClick(View view) {
-        startActivity(new Intent(this, SearchActivity.class));
+        Intent intent = new Intent(this, SearchActivity.class);
+//        Bundle bundle = new Bundle();
+//        bundle.putParcelableArrayList("AlbumList", albumList);
+//        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
     public void createOnClick(View view) {
@@ -104,7 +107,7 @@ public class HomeActivity extends AppCompatActivity {
     public void deserialize() {
         try {
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream(storeDir + File.separator + storeFile));
-            albumList = (List<Album>) ois.readObject();
+            albumList = (ArrayList<Album>) ois.readObject();
             ois.close();
         } catch (ClassNotFoundException | IOException e) {
             e.printStackTrace();
@@ -112,6 +115,4 @@ public class HomeActivity extends AppCompatActivity {
         }
 
     }
-
-
 }

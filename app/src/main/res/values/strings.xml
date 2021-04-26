@@ -6,4 +6,9 @@
     values-round/strings.xml for round devices.
     -->
     <string name="hello_world">Hello Square World!</string>
+    <string-array name="tagValues">
+        <item>Select Tag</item>
+        <item>location</item>
+        <item>person</item>
+    </string-array>
 </resources>

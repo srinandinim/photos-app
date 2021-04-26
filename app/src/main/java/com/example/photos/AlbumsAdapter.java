@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class AlbumsAdapter extends BaseAdapter {
@@ -66,7 +67,7 @@ public class AlbumsAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, AlbumActivity.class);
-                intent.putExtra("CurrentAlbum", album);
+                intent.putExtra("CurrentAlbum", (Serializable) album);
                 mContext.startActivity(intent);
             }
         });
