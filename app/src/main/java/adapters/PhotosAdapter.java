@@ -20,7 +20,7 @@ import java.util.List;
 import models.Album;
 import models.Photo;
 
-public class PhotosAdapter extends BaseAdapter {
+public class PhotosAdapter extends BaseAdapter { //album view gridview
 
     private final Context mContext;
     private final Album currentAlbum;
@@ -60,7 +60,7 @@ public class PhotosAdapter extends BaseAdapter {
         TextView photoName = convertView.findViewById(R.id.photoName);
         ImageButton delete = convertView.findViewById(R.id.photoDelete);
 
-        photoImage.setImageURI(Uri.parse(photo.getUriString())); //TODO: Scale image
+        if (photo != null) photoImage.setImageURI(Uri.parse(photo.getUriString())); //TODO: Scale image
         photoImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -71,7 +71,7 @@ public class PhotosAdapter extends BaseAdapter {
             }
         });
 
-        photoName.setText(photo.getName());
+        if (photo != null) photoName.setText(photo.getName());
 
         final int arrPosition = position;
         delete.setOnClickListener(new View.OnClickListener() {

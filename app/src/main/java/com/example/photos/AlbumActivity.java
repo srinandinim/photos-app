@@ -31,12 +31,17 @@ public class AlbumActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_album);
 
-        currentAlbum = (Album) getIntent().getSerializableExtra("CurrentAlbum");
+        currentAlbum = (Album) getIntent().getSerializableExtra("currentAlbum");
         photoList = currentAlbum.getPhotoList();
 
         gridview = findViewById(R.id.photosGrid);
         photosAdapter = new PhotosAdapter(this, currentAlbum, photoList);
         gridview.setAdapter(photosAdapter);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
 
     }
 
@@ -59,10 +64,15 @@ public class AlbumActivity extends AppCompatActivity {
 
     public void slideshowOnClick(View view) {
 
+        Intent slideIntent = new Intent(this, SlideshowActivity.class);
+        slideIntent.putExtra("slideshowAlbum", currentAlbum);
+        startActivity(slideIntent);
+
     }
 
     public void backOnClick(View view) {
-        startActivity(new Intent(this, HomeActivity.class));
+        finish();
+        //startActivity(new Intent(this, HomeActivity.class));
     }
 
 }

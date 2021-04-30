@@ -16,6 +16,7 @@ public class Photo implements Serializable {
 
     public Photo(Uri uri) {
         this.uri = uri.toString();
+        //System.out.println(getUriString() +" asdf "+ uri.getPath() +" asdf "+ uri.getLastPathSegment());
         file = new File(uri.getPath());
         name = file.getName();
         tags = new ArrayList<>();
@@ -79,5 +80,7 @@ public class Photo implements Serializable {
     public String getUriString() {
         return uri;
     }
+
+    //public Uri getUri(){ return uri; }
 
 }

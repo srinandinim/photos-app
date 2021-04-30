@@ -123,8 +123,13 @@ public class EditPhotoActivity extends AppCompatActivity {
     }
 
     public void backOnClick(View view) {
+
+        finish();
+        /*
         Intent intent = new Intent(this, AlbumActivity.class);
         intent.putExtra("CurrentAlbum", (Serializable) currentAlbum);
         startActivity(intent);
+        */
+
     }
 }

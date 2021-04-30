@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +23,7 @@ import java.util.List;
 
 import models.Album;
 
-public class AlbumsAdapter extends BaseAdapter {
+public class AlbumsAdapter extends BaseAdapter { //HomeActivity Grid view
 
     private final Context mContext;
     private final List<Album> albums;
@@ -65,14 +66,14 @@ public class AlbumsAdapter extends BaseAdapter {
             albumCover.setImageResource(R.drawable.noimageavailable);
             //TODO: fix image scaling
         } else {
-            //TODO: image
+            albumCover.setImageURI(Uri.parse(album.getPhotoList().get(0).getUriString()));
         }
 
         albumCover.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, AlbumActivity.class);
-                intent.putExtra("CurrentAlbum", (Serializable) album);
+                intent.putExtra("currentAlbum", album);
                 mContext.startActivity(intent);
             }
         });

@@ -33,21 +33,33 @@ public class HomeActivity extends AppCompatActivity {
     GridView albumGrid;
 
     AlbumsAdapter albumsAdapter;
-    ArrayList<Album> albumList;
+    ArrayList<Album> albumList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        System.out.println("onCreate");
+
         // deserialize();
+        /*
         albumList = new ArrayList<>();
         for (int i = 0; i < 5; i++)
             albumList.add(new Album("temp" + i));
-
+*/
         albumGrid = findViewById(R.id.albumGrid);
         albumsAdapter = new AlbumsAdapter(this, albumList);
         albumGrid.setAdapter(albumsAdapter);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        albumsAdapter.notifyDataSetChanged();
+        System.out.println(albumList);
+
     }
 
     public void searchOnClick(View view) {
@@ -70,8 +82,7 @@ public class HomeActivity extends AppCompatActivity {
                         if (!containsAlbum(input.getText().toString().trim())) {
                             albumList.add(new Album(input.getText().toString()));
                             albumsAdapter.notifyDataSetChanged();
-
-                            serialize();
+                            //serialize();
                         } else {
                             Toast.makeText(HomeActivity.this, "Invalid Album Name", Toast.LENGTH_SHORT).show();
                         }
