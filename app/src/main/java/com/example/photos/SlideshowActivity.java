@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import models.Album;
+import models.User;
 
 public class SlideshowActivity extends AppCompatActivity {
 
@@ -28,7 +29,7 @@ public class SlideshowActivity extends AppCompatActivity {
         next = findViewById(R.id.next);
         prev = findViewById(R.id.prev);
 
-        currentAlbum = (Album) getIntent().getSerializableExtra("slideshowAlbum");
+        currentAlbum = User.currentAlbum;
 
         if (currentAlbum.getSize() > 0){
             imageView.setImageURI(Uri.parse(currentAlbum.getPhotoList().get(iter).getUriString()));

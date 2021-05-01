@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 import adapters.AlbumsAdapter;
 import models.Album;
+import models.User;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -33,14 +34,11 @@ public class HomeActivity extends AppCompatActivity {
     GridView albumGrid;
 
     AlbumsAdapter albumsAdapter;
-    ArrayList<Album> albumList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
-        System.out.println("onCreate");
 
         // deserialize();
         /*
@@ -49,7 +47,7 @@ public class HomeActivity extends AppCompatActivity {
             albumList.add(new Album("temp" + i));
 */
         albumGrid = findViewById(R.id.albumGrid);
-        albumsAdapter = new AlbumsAdapter(this, albumList);
+        albumsAdapter = new AlbumsAdapter(this);
         albumGrid.setAdapter(albumsAdapter);
     }
 
@@ -58,16 +56,12 @@ public class HomeActivity extends AppCompatActivity {
         super.onResume();
 
         albumsAdapter.notifyDataSetChanged();
-        System.out.println(albumList);
+        System.out.println(User.albumList);
 
     }
 
     public void searchOnClick(View view) {
-        Intent intent = new Intent(this, SearchActivity.class);
-//        Bundle bundle = new Bundle();
-//        bundle.putParcelableArrayList("AlbumList", albumList);
-//        intent.putExtras(bundle);
-        startActivity(intent);
+        startActivity(new Intent(this, SearchActivity.class));
     }
 
     public void createOnClick(View view) {
@@ -80,7 +74,7 @@ public class HomeActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         if (!containsAlbum(input.getText().toString().trim())) {
-                            albumList.add(new Album(input.getText().toString()));
+                            User.albumList.add(new Album(input.getText().toString()));
                             albumsAdapter.notifyDataSetChanged();
                             //serialize();
                         } else {
@@ -99,13 +93,15 @@ public class HomeActivity extends AppCompatActivity {
         if (name == null || name.isEmpty())
             return true;
 
-        for (Album currAlbum : albumList) {
+        for (Album currAlbum : User.albumList) {
             if (currAlbum.getName().toLowerCase().equals(name.toLowerCase()))
                 return true;
         }
 
         return false;
     }
+
+    /*
 
     public void serialize() {
         try {
@@ -129,4 +125,6 @@ public class HomeActivity extends AppCompatActivity {
         }
 
     }
+    */
+
 }

@@ -22,20 +22,19 @@ import java.io.Serializable;
 import java.util.List;
 
 import models.Album;
+import models.User;
 
 public class AlbumsAdapter extends BaseAdapter { //HomeActivity Grid view
 
     private final Context mContext;
-    private final List<Album> albums;
 
-    public AlbumsAdapter(Context context, List<Album> albums) {
+    public AlbumsAdapter(Context context) {
         this.mContext = context;
-        this.albums = albums;
     }
 
     @Override
     public int getCount() {
-        return albums.size();
+        return User.albumList.size();
     }
 
     @Override
@@ -45,12 +44,12 @@ public class AlbumsAdapter extends BaseAdapter { //HomeActivity Grid view
 
     @Override
     public Object getItem(int position) {
-        return albums.get(position);
+        return User.albumList.get(position);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final Album album = albums.get(position);
+        final Album album = User.albumList.get(position);
 
         if (convertView == null) {
             final LayoutInflater layoutInflater = LayoutInflater.from(mContext);
@@ -72,9 +71,8 @@ public class AlbumsAdapter extends BaseAdapter { //HomeActivity Grid view
         albumCover.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(mContext, AlbumActivity.class);
-                intent.putExtra("currentAlbum", album);
-                mContext.startActivity(intent);
+                User.setCurrentAlbum(album);
+                mContext.startActivity(new Intent(mContext, AlbumActivity.class));
             }
         });
 
@@ -111,7 +109,7 @@ public class AlbumsAdapter extends BaseAdapter { //HomeActivity Grid view
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                albums.remove(arrPosition);
+                User.albumList.remove(arrPosition);
                 notifyDataSetChanged();
             }
         });
@@ -123,7 +121,7 @@ public class AlbumsAdapter extends BaseAdapter { //HomeActivity Grid view
         if (name == null || name.isEmpty())
             return true;
 
-        for (Album currAlbum : albums) {
+        for (Album currAlbum : User.albumList) {
             if (currAlbum.getName().toLowerCase().equals(name.toLowerCase()))
                 return true;
         }

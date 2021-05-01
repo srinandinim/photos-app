@@ -6,6 +6,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -23,12 +24,10 @@ import models.Photo;
 public class SearchActivity extends AppCompatActivity {
 
     Spinner searchTag1, searchTag2;
-    TextView searchVal1, searchVal2;
+    EditText searchVal1, searchVal2;
     RadioGroup radioGroup;
     Button search, createAlbum;
     GridView searchGrid;
-
-    ArrayList<Album> albumList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,21 +57,15 @@ public class SearchActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
+            public void onNothingSelected(AdapterView<?> adapterView) { }
         });
 
         searchVal1.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
 
             @Override
             public void afterTextChanged(Editable editable) {
@@ -108,21 +101,15 @@ public class SearchActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
+            public void onNothingSelected(AdapterView<?> adapterView) { }
         });
 
         searchVal2.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
 
             @Override
             public void afterTextChanged(Editable editable) {
@@ -148,8 +135,6 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
-//        Bundle bundle = getIntent().getExtras();
-//        albumList = bundle.getParcelable("AlbumList");
     }
 
     private void disableSearch() {

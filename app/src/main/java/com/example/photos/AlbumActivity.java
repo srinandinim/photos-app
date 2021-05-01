@@ -10,16 +10,17 @@ import android.widget.GridView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import adapters.PhotosAdapter;
 import models.Album;
 import models.Photo;
+import models.User;
 
 public class AlbumActivity extends AppCompatActivity {
 
     Album currentAlbum;
-    List<Photo> photoList;
 
     GridView gridview;
     PhotosAdapter photosAdapter;
@@ -31,22 +32,24 @@ public class AlbumActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_album);
 
-        currentAlbum = (Album) getIntent().getSerializableExtra("currentAlbum");
-        photoList = currentAlbum.getPhotoList();
+        currentAlbum = User.currentAlbum; //(Album) getIntent().getSerializableExtra("currentAlbum");
 
         gridview = findViewById(R.id.photosGrid);
-        photosAdapter = new PhotosAdapter(this, currentAlbum, photoList);
+        photosAdapter = new PhotosAdapter(this);
         gridview.setAdapter(photosAdapter);
+        System.out.println("album create " + currentAlbum.getSize());
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
+        System.out.println("album resume " + currentAlbum.getSize());
+
     }
 
     public void addPhotoOnClick(View view) {
-        Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        Intent galleryIntent = new Intent(Intent.ACTION_OPEN_DOCUMENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI); //TODO: used to be ACTION_PICK, https://stackoverflow.com/questions/40438537/permission-denied-opening-provider-com-google-android-apps-photos-contentprovi
         galleryIntent.setType("image/*");
         startActivityForResult(galleryIntent, PICK_IMAGE);
     }
@@ -64,9 +67,7 @@ public class AlbumActivity extends AppCompatActivity {
 
     public void slideshowOnClick(View view) {
 
-        Intent slideIntent = new Intent(this, SlideshowActivity.class);
-        slideIntent.putExtra("slideshowAlbum", currentAlbum);
-        startActivity(slideIntent);
+        startActivity(new Intent(this, SlideshowActivity.class));
 
     }
 

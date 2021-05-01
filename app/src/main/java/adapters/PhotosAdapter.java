@@ -19,17 +19,16 @@ import java.util.List;
 
 import models.Album;
 import models.Photo;
+import models.User;
 
 public class PhotosAdapter extends BaseAdapter { //album view gridview
 
     private final Context mContext;
-    private final Album currentAlbum;
     private final List<Photo> photos;
 
-    public PhotosAdapter(Context context, Album currentAlbum, List<Photo> photos) {
+    public PhotosAdapter(Context context) {
         this.mContext = context;
-        this.currentAlbum = currentAlbum;
-        this.photos = photos;
+        photos = User.currentAlbum.getPhotoList();
     }
 
     @Override
@@ -60,18 +59,16 @@ public class PhotosAdapter extends BaseAdapter { //album view gridview
         TextView photoName = convertView.findViewById(R.id.photoName);
         ImageButton delete = convertView.findViewById(R.id.photoDelete);
 
-        if (photo != null) photoImage.setImageURI(Uri.parse(photo.getUriString())); //TODO: Scale image
+        photoImage.setImageURI(Uri.parse(photo.getUriString())); //TODO: Scale image
         photoImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(mContext, EditPhotoActivity.class);
-                intent.putExtra("CurrentPhoto", photo);
-                intent.putExtra("CurrentAlbum", (Serializable) currentAlbum);
-                mContext.startActivity(intent);
+                User.currentPhoto = photo;
+                mContext.startActivity(new Intent(mContext, EditPhotoActivity.class));
             }
         });
 
-        if (photo != null) photoName.setText(photo.getName());
+        photoName.setText(photo.getName());
 
         final int arrPosition = position;
         delete.setOnClickListener(new View.OnClickListener() {

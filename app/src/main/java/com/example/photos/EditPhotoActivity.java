@@ -22,11 +22,11 @@ import java.io.Serializable;
 import adapters.TagAdapter;
 import models.Album;
 import models.Photo;
+import models.User;
 
 public class EditPhotoActivity extends AppCompatActivity {
 
     Photo currentPhoto;
-    Album currentAlbum;
 
     ImageView photoPicture;
     TextView photoName;
@@ -43,8 +43,7 @@ public class EditPhotoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_photo);
 
-        currentPhoto = (Photo) getIntent().getSerializableExtra("CurrentPhoto");
-        currentAlbum = (Album) getIntent().getSerializableExtra("CurrentAlbum");
+        currentPhoto = User.currentPhoto;
 
         photoPicture = findViewById(R.id.photoPicture);
         photoPicture.setImageURI(Uri.parse(currentPhoto.getUriString())); //TODO: Scale image
