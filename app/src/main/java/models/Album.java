@@ -20,6 +20,19 @@ public class Album implements Serializable {
     }
 
     public boolean addPhoto(Photo newPhoto) {
+
+        if (photoList.contains(newPhoto))
+            return false;
+
+        for (Album iterAlbum: User.albumList){
+            for (Photo iterPhoto: iterAlbum.getPhotoList()){
+                if (iterPhoto.equals(newPhoto)){ //TODO: if the photo has already been added to another album add same reference
+                    photoList.add(iterPhoto);
+                    return true;
+                }
+            }
+        }
+
         photoList.add(newPhoto); //TODO: only add non-duplicate, make a set maybe
         return true;
     }

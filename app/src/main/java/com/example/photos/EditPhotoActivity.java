@@ -113,7 +113,6 @@ public class EditPhotoActivity extends AppCompatActivity {
                     .create();
             dialog.show();
         } else {
-//            System.out.println (currentPhoto.getTags());
             tagAdapter.notifyDataSetChanged();
         }
 
@@ -121,14 +120,5 @@ public class EditPhotoActivity extends AppCompatActivity {
         tagValue.setText("");
     }
 
-    public void backOnClick(View view) {
-
-        finish();
-        /*
-        Intent intent = new Intent(this, AlbumActivity.class);
-        intent.putExtra("CurrentAlbum", (Serializable) currentAlbum);
-        startActivity(intent);
-        */
-
-    }
+    public void backOnClick(View view) { finish(); }
 }

@@ -16,9 +16,9 @@ public class Photo implements Serializable {
 
     public Photo(Uri uri) {
         this.uri = uri.toString();
-        //System.out.println(getUriString() +" asdf "+ uri.getPath() +" asdf "+ uri.getLastPathSegment());
         file = new File(uri.getPath());
         name = file.getName();
+        //System.out.println(getUriString() +" asdf "+ uri.getPath() +" asdf "+ uri.getLastPathSegment() + " asdf ");
         tags = new ArrayList<>();
     }
 
@@ -35,13 +35,8 @@ public class Photo implements Serializable {
         key = key.trim();
         value = value.trim();
 
-        for (Tag existingTag : tags) { //TODO: change it to .contains
-            if (key.toLowerCase().equals(existingTag.getKey().toLowerCase())) {
-                if (value.toLowerCase().equals(existingTag.getValue().toLowerCase())) {
-                    return false;
-                }
-            }
-        }
+        if (tags.contains(new Tag(key, value)))
+            return false;
 
         tags.add(new Tag(key, value));
 

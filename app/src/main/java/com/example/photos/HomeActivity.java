@@ -41,23 +41,10 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         // deserialize();
-        /*
-        albumList = new ArrayList<>();
-        for (int i = 0; i < 5; i++)
-            albumList.add(new Album("temp" + i));
-*/
+
         albumGrid = findViewById(R.id.albumGrid);
         albumsAdapter = new AlbumsAdapter(this);
         albumGrid.setAdapter(albumsAdapter);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        albumsAdapter.notifyDataSetChanged();
-        System.out.println(User.albumList);
-
     }
 
     public void searchOnClick(View view) {

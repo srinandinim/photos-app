@@ -32,25 +32,17 @@ public class AlbumActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_album);
 
-        currentAlbum = User.currentAlbum; //(Album) getIntent().getSerializableExtra("currentAlbum");
+        currentAlbum = User.currentAlbum;
 
         gridview = findViewById(R.id.photosGrid);
         photosAdapter = new PhotosAdapter(this);
         gridview.setAdapter(photosAdapter);
-        System.out.println("album create " + currentAlbum.getSize());
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        System.out.println("album resume " + currentAlbum.getSize());
-
     }
 
     public void addPhotoOnClick(View view) {
-        Intent galleryIntent = new Intent(Intent.ACTION_OPEN_DOCUMENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI); //TODO: used to be ACTION_PICK, https://stackoverflow.com/questions/40438537/permission-denied-opening-provider-com-google-android-apps-photos-contentprovi
+        Intent galleryIntent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         galleryIntent.setType("image/*");
+        galleryIntent.addCategory(Intent.CATEGORY_OPENABLE);
         startActivityForResult(galleryIntent, PICK_IMAGE);
     }
 
@@ -66,14 +58,9 @@ public class AlbumActivity extends AppCompatActivity {
     }
 
     public void slideshowOnClick(View view) {
-
         startActivity(new Intent(this, SlideshowActivity.class));
-
     }
 
-    public void backOnClick(View view) {
-        finish();
-        //startActivity(new Intent(this, HomeActivity.class));
-    }
+    public void backOnClick(View view) { finish(); }
 
 }
