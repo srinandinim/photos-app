@@ -35,7 +35,7 @@ public class Photo implements Serializable {
         key = key.trim();
         value = value.trim();
 
-        for (Tag existingTag : tags) {
+        for (Tag existingTag : tags) { //TODO: change it to .contains
             if (key.toLowerCase().equals(existingTag.getKey().toLowerCase())) {
                 if (value.toLowerCase().equals(existingTag.getValue().toLowerCase())) {
                     return false;

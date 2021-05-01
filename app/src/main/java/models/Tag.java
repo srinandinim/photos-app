@@ -1,5 +1,7 @@
 package models;
 
+import androidx.annotation.Nullable;
+
 import java.io.Serializable;
 
 public class Tag implements Serializable, Comparable<Tag> {
@@ -27,9 +29,21 @@ public class Tag implements Serializable, Comparable<Tag> {
 
     @Override
     public int compareTo(Tag tag) {
-        if (!key.equals(tag.getKey())){
-            return key.compareTo(tag.getKey());
+        if (!key.toLowerCase().equals(tag.getKey().toLowerCase())){
+            return key.compareToIgnoreCase(tag.getKey());
         }
-        return value.compareTo(tag.getValue());
+        return value.compareToIgnoreCase(tag.getValue());
+    }
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+
+        if (obj instanceof Tag){
+            if ( this.compareTo((Tag)obj) == 0)
+                return true;
+        }
+
+        return false;
+
     }
 }

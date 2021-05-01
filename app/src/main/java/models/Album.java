@@ -10,8 +10,13 @@ public class Album implements Serializable {
     private List<Photo> photoList;
 
     public Album(String name) {
-        this.name = name;
+        this.name = name.trim();
         photoList = new ArrayList<>();
+    }
+
+    public Album(String name, List<Photo> photoList) {
+        this.name = name.trim();
+        this.photoList = photoList; //TODO: Need to clone it over manually
     }
 
     public boolean addPhoto(Photo newPhoto) {

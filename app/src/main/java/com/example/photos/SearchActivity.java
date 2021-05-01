@@ -1,5 +1,7 @@
 package com.example.photos;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -8,9 +10,10 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,14 +23,19 @@ import java.util.List;
 import adapters.SearchPhotosAdapter;
 import models.Album;
 import models.Photo;
+import models.Tag;
+import models.User;
 
 public class SearchActivity extends AppCompatActivity {
 
     Spinner searchTag1, searchTag2;
     EditText searchVal1, searchVal2;
     RadioGroup radioGroup;
+    RadioButton andChoice, orChoice;
     Button search, createAlbum;
     GridView searchGrid;
+
+    List<Photo> searchResults;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +47,8 @@ public class SearchActivity extends AppCompatActivity {
         searchVal1 = findViewById(R.id.searchVal1);
         searchVal2 = findViewById(R.id.searchVal2);
         radioGroup = findViewById(R.id.toggleGroup);
+        andChoice = findViewById(R.id.andChoice);
+        orChoice = findViewById(R.id.orChoice);
         search = findViewById(R.id.search);
 
         searchGrid = findViewById(R.id.searchGrid);
@@ -157,8 +167,18 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     public void searchOnClick(View view) {
-        //find photos
-        List<Photo> searchResults = new ArrayList<>();
+
+        searchResults = new ArrayList<>();
+
+        for (Album iterAlbum: User.albumList){
+            for (Photo iterPhoto: iterAlbum.getPhotoList()){
+                if (fitsTagsSpecifications(iterPhoto)) {
+                    searchResults.add(iterPhoto);
+                }
+            }
+        }
+
+        System.out.println("Results: "+ searchResults.size());
 
         SearchPhotosAdapter searchPhotosAdapter = new SearchPhotosAdapter(this, searchResults);
         searchGrid.setAdapter(searchPhotosAdapter);
@@ -169,7 +189,82 @@ public class SearchActivity extends AppCompatActivity {
             createAlbum.setEnabled(true);
     }
 
+
+    private boolean fitsTagsSpecifications(Photo currentPhoto) {
+
+        boolean tag1Include = false;
+        boolean tag2Include = false;
+
+        if ( currentPhoto.getTags().contains(
+                new Tag(searchTag1.getSelectedItem().toString(), searchVal1.getText().toString())) ) {
+            tag1Include = true;
+        }
+
+        String toggleValue = null;
+        if (searchVal2.isEnabled()) {
+            RadioButton chosenTagButton = radioGroup.findViewById(radioGroup.getCheckedRadioButtonId());
+            toggleValue = chosenTagButton.getText().toString();
+
+            if (currentPhoto.getTags().contains(
+                    new Tag(searchTag2.getSelectedItem().toString(), searchVal2.getText().toString())) ) {
+                tag2Include = true;
+            }
+        }
+
+        if (toggleValue == null) {
+            return tag1Include;
+        } else if (toggleValue.equals(andChoice.getText())) {
+            return tag1Include && tag2Include;
+        } else if (toggleValue.equals(orChoice.getText())) {
+            return tag1Include || tag2Include;
+        }
+
+        return false;
+    }
+
+
     public void createAlbumOnClick(View view) {
 
+        if (searchResults.size() == 0)
+            return;
+
+        final EditText input = new EditText(this);
+
+        AlertDialog dialog = (new AlertDialog.Builder(this))
+                .setTitle("Create New Album")
+                .setMessage("\nAlbum Name:")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        if (!containsAlbum(input.getText().toString().trim())) {
+                            User.albumList.add(new Album(input.getText().toString(), searchResults));
+                            //serialize();
+                        } else {
+                            Toast.makeText(SearchActivity.this, "Invalid Album Name", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .setNegativeButton("Cancel", null)
+                .create();
+
+        dialog.setView(input, 40, 0, 40, 0);
+        dialog.show();
+
+    }
+
+    private boolean containsAlbum(String name) {
+        if (name == null || name.isEmpty())
+            return true;
+
+        for (Album currAlbum : User.albumList) {
+            if (currAlbum.getName().toLowerCase().equals(name.toLowerCase()))
+                return true;
+        }
+
+        return false;
+    }
+
+    public void backOnClick(View view){
+        finish();
     }
 }
