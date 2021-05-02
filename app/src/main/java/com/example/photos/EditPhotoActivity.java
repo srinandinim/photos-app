@@ -1,23 +1,23 @@
 package com.example.photos;
 
 import android.app.AlertDialog;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import java.io.Serializable;
 
 import adapters.TagAdapter;
 import models.Album;
@@ -32,6 +32,9 @@ public class EditPhotoActivity extends AppCompatActivity {
     TextView photoName;
     ListView listView;
 
+    Button movePhoto;
+    Album parentAlbum;
+
     TagAdapter tagAdapter;
 
     RadioGroup tagType;
@@ -44,6 +47,8 @@ public class EditPhotoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_photo);
 
         currentPhoto = User.currentPhoto;
+        parentAlbum = User.currentAlbum;
+        movePhoto = findViewById(R.id.movePhoto);
 
         photoPicture = findViewById(R.id.photoPicture);
         photoPicture.setImageURI(Uri.parse(currentPhoto.getUriString())); //TODO: Scale image
@@ -63,18 +68,17 @@ public class EditPhotoActivity extends AppCompatActivity {
         tagType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                if (tagValue.getText().length() > 0) {
-                    addNewTag.setEnabled(true);
-                } else {
-                    addNewTag.setEnabled(false);
-                }
+            if (tagValue.getText().length() > 0) {
+                addNewTag.setEnabled(true);
+            } else {
+                addNewTag.setEnabled(false);
+            }
             }
         });
 
         tagValue.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -86,14 +90,38 @@ public class EditPhotoActivity extends AppCompatActivity {
             }
 
             @Override
-            public void afterTextChanged(Editable editable) {
-            }
+            public void afterTextChanged(Editable editable) { }
         });
 
 
     }
 
     public void moveOnClick(View view) {
+
+        PopupMenu popupMenu = new PopupMenu(this, view);
+
+        for (Album album: User.albumList)
+            popupMenu.getMenu().add(album.getName());
+
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                Album pickedAlbum = null;
+                for (Album album: User.albumList){
+                    if (album.getName().equals(menuItem.getTitle())){
+                        pickedAlbum = album;
+                        break;
+                    }
+                }
+                parentAlbum.deletePhoto(currentPhoto);
+                pickedAlbum.addPhoto(currentPhoto);
+                parentAlbum = pickedAlbum;
+                Toast.makeText(EditPhotoActivity.this, "Moved photo to: "+ parentAlbum.getName(), Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        });
+
+        popupMenu.show();
 
     }
 

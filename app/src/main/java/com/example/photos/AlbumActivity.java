@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.GridView;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +23,7 @@ public class AlbumActivity extends AppCompatActivity {
 
     Album currentAlbum;
 
+    TextView textView;
     GridView gridview;
     PhotosAdapter photosAdapter;
 
@@ -33,10 +35,19 @@ public class AlbumActivity extends AppCompatActivity {
         setContentView(R.layout.activity_album);
 
         currentAlbum = User.currentAlbum;
+        textView = findViewById(R.id.albumTitle);
+        textView.setText(currentAlbum.getName());
 
         gridview = findViewById(R.id.photosGrid);
         photosAdapter = new PhotosAdapter(this);
         gridview.setAdapter(photosAdapter);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        photosAdapter.notifyDataSetChanged();
     }
 
     public void addPhotoOnClick(View view) {

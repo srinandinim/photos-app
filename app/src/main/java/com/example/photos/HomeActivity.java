@@ -47,6 +47,14 @@ public class HomeActivity extends AppCompatActivity {
         albumGrid.setAdapter(albumsAdapter);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        albumsAdapter.notifyDataSetChanged();
+
+    }
+
     public void searchOnClick(View view) {
         startActivity(new Intent(this, SearchActivity.class));
     }
