@@ -113,26 +113,26 @@
 
     <GridView
         android:id="@+id/searchGrid"
-        android:layout_width="423dp"
-        android:layout_height="265dp"
+        android:layout_width="388dp"
+        android:layout_height="277dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.615"
+        app:layout_constraintHorizontal_bias="0.478"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.725" />
-
-    <Button
-        android:id="@+id/searchCreateAlbum"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="createAlbumOnClick"
-        android:text="Create Album"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.971" />
-
+        app:layout_constraintTop_toBottomOf="@+id/search"
+        app:layout_constraintVertical_bias="0.258" />
+    <!--
+        <Button
+            android:id="@+id/searchCreateAlbum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="createAlbumOnClick"
+            android:text="Create Album"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.971" />
+    -->
 </androidx.constraintlayout.widget.ConstraintLayout>

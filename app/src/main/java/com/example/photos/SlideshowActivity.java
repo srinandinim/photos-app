@@ -18,7 +18,7 @@ public class SlideshowActivity extends AppCompatActivity {
     Button prev;
     Button next;
 
-    int iter = 0;
+    int counter = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +32,7 @@ public class SlideshowActivity extends AppCompatActivity {
         currentAlbum = User.currentAlbum;
 
         if (currentAlbum.getSize() > 0){
-            imageView.setImageURI(Uri.parse(currentAlbum.getPhotoList().get(iter).getUriString()));
+            imageView.setImageURI(Uri.parse(currentAlbum.getPhotoList().get(counter).getUriString()));
         }
         else{
             next.setClickable(false);
@@ -43,21 +43,21 @@ public class SlideshowActivity extends AppCompatActivity {
 
     public void nextOnclick(View view){
 
-        iter++;
-        if (iter >= currentAlbum.getSize())
-            iter = 0;
+        counter++;
+        if (counter >= currentAlbum.getSize())
+            counter = 0;
 
-        imageView.setImageURI(Uri.parse(currentAlbum.getPhotoList().get(iter).getUriString()));
+        imageView.setImageURI(Uri.parse(currentAlbum.getPhotoList().get(counter).getUriString()));
 
     }
 
     public void prevOnClick(View view){
 
-        iter--;
-        if (iter < 0)
-            iter = currentAlbum.getSize()-1;
+        counter--;
+        if (counter < 0)
+            counter = currentAlbum.getSize()-1;
 
-        imageView.setImageURI(Uri.parse(currentAlbum.getPhotoList().get(iter).getUriString()));
+        imageView.setImageURI(Uri.parse(currentAlbum.getPhotoList().get(counter).getUriString()));
 
     }
 

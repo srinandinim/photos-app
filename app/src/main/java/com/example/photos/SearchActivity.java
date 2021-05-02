@@ -31,7 +31,8 @@ public class SearchActivity extends AppCompatActivity {
     EditText searchVal1, searchVal2;
     RadioGroup radioGroup;
     RadioButton andChoice, orChoice;
-    Button search, createAlbum;
+    Button search;
+    //Button createAlbum;
     GridView searchGrid;
 
     List<Photo> searchResults;
@@ -51,7 +52,7 @@ public class SearchActivity extends AppCompatActivity {
         search = findViewById(R.id.search);
 
         searchGrid = findViewById(R.id.searchGrid);
-        createAlbum = findViewById(R.id.searchCreateAlbum);
+        //createAlbum = findViewById(R.id.searchCreateAlbum);
 
         disableSearch();
 
@@ -162,7 +163,7 @@ public class SearchActivity extends AppCompatActivity {
         }
 
         search.setEnabled(false);
-        createAlbum.setEnabled(false);
+        //createAlbum.setEnabled(false);
     }
 
     public void searchOnClick(View view) {
@@ -176,12 +177,10 @@ public class SearchActivity extends AppCompatActivity {
             }
         }
 
-        System.out.println("Results: "+ searchResults.size()); //TODO: Delete println
-
         SearchPhotosAdapter searchPhotosAdapter = new SearchPhotosAdapter(this, searchResults);
         searchGrid.setAdapter(searchPhotosAdapter);
 
-        createAlbum.setEnabled(searchResults.size() != 0);
+        //createAlbum.setEnabled(searchResults.size() != 0);
     }
 
 
@@ -220,7 +219,7 @@ public class SearchActivity extends AppCompatActivity {
         return false;
     }
 
-
+    /*
     public void createAlbumOnClick(View view) {
 
         if (searchResults.size() == 0)
@@ -261,6 +260,7 @@ public class SearchActivity extends AppCompatActivity {
 
         return false;
     }
+    */
 
     public void backOnClick(View view){ finish(); }
 }

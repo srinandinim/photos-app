@@ -27,7 +27,7 @@ public class Photo implements Serializable {
         if (!(obj instanceof Photo))
             return false;
 
-        return file.equals(((Photo) obj).getFile()); //TODO: check might be different cause URI
+        return file.equals(((Photo) obj).getFile());
     }
 
     public List<String> valuesWithKey(String filterKey){
@@ -85,7 +85,5 @@ public class Photo implements Serializable {
     public String getUriString() {
         return uri;
     }
-
-    //public Uri getUri(){ return uri; }
 
 }

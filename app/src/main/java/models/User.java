@@ -10,7 +10,6 @@ public class User {
     public static Photo currentPhoto = null;
 
     public static void setCurrentAlbum(Album album){
-        System.out.println("Setting");
         currentAlbum = album;
     }
 
