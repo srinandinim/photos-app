@@ -30,6 +30,16 @@ public class Photo implements Serializable {
         return file.equals(((Photo) obj).getFile()); //TODO: check might be different cause URI
     }
 
+    public List<String> valuesWithKey(String filterKey){
+
+        List<String> returnList = new ArrayList<>();
+        for (Tag tag: tags){
+            if (tag.getKey().equals(filterKey))
+                returnList.add(tag.getValue());
+        }
+
+        return returnList;
+    }
 
     public boolean addTag(String key, String value) {
         key = key.trim();

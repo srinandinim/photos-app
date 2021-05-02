@@ -9,7 +9,7 @@
     <GridView
         android:id="@+id/albumGrid"
         android:layout_width="360dp"
-        android:layout_height="400dp"
+        android:layout_height="380dp"
         android:columnWidth="100dp"
         android:gravity="center"
         android:horizontalSpacing="10dp"
@@ -26,28 +26,30 @@
         android:id="@+id/searchScreen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="search"
         android:onClick="searchOnClick"
         android:src="@android:drawable/ic_menu_search"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.052"
+        app:layout_constraintHorizontal_bias="0.045"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.925"
+        app:layout_constraintTop_toBottomOf="@+id/albumGrid"
+        app:layout_constraintVertical_bias="0.544"
         tools:src="@android:drawable/ic_menu_search" />
 
     <ImageButton
         android:id="@+id/createNewAlbum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="New Album"
         android:onClick="createOnClick"
         android:src="@android:drawable/ic_menu_add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.947"
+        app:layout_constraintHorizontal_bias="0.929"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.925" />
+        app:layout_constraintTop_toBottomOf="@+id/albumGrid"
+        app:layout_constraintVertical_bias="0.544" />
 
     <TextView
         android:id="@+id/textView"

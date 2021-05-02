@@ -23,7 +23,6 @@ import java.util.List;
 import adapters.SearchPhotosAdapter;
 import models.Album;
 import models.Photo;
-import models.Tag;
 import models.User;
 
 public class SearchActivity extends AppCompatActivity {
@@ -170,23 +169,19 @@ public class SearchActivity extends AppCompatActivity {
 
         searchResults = new ArrayList<>();
 
-        for (Album iterAlbum: User.albumList){
-            for (Photo iterPhoto: iterAlbum.getPhotoList()){
-                if (fitsTagsSpecifications(iterPhoto)) {
-                    searchResults.add(iterPhoto);
-                }
+        for (Album currAlbum: User.albumList){
+            for (Photo currPhoto: currAlbum.getPhotoList()){
+                if (fitsTagsSpecifications(currPhoto))
+                    searchResults.add(currPhoto);
             }
         }
 
-        System.out.println("Results: "+ searchResults.size());
+        System.out.println("Results: "+ searchResults.size()); //TODO: Delete println
 
         SearchPhotosAdapter searchPhotosAdapter = new SearchPhotosAdapter(this, searchResults);
         searchGrid.setAdapter(searchPhotosAdapter);
 
-        if (searchResults.size() == 0)
-            createAlbum.setEnabled(false);
-        else
-            createAlbum.setEnabled(true);
+        createAlbum.setEnabled(searchResults.size() != 0);
     }
 
 
@@ -195,9 +190,11 @@ public class SearchActivity extends AppCompatActivity {
         boolean tag1Include = false;
         boolean tag2Include = false;
 
-        if ( currentPhoto.getTags().contains(
-                new Tag(searchTag1.getSelectedItem().toString(), searchVal1.getText().toString())) ) {
-            tag1Include = true;
+        for (String value: currentPhoto.valuesWithKey(searchTag1.getSelectedItem().toString())){
+            if (value.startsWith(searchVal1.getText().toString().trim())) {
+                tag1Include = true;
+                break;
+            }
         }
 
         String toggleValue = null;
@@ -205,19 +202,20 @@ public class SearchActivity extends AppCompatActivity {
             RadioButton chosenTagButton = radioGroup.findViewById(radioGroup.getCheckedRadioButtonId());
             toggleValue = chosenTagButton.getText().toString();
 
-            if (currentPhoto.getTags().contains(
-                    new Tag(searchTag2.getSelectedItem().toString(), searchVal2.getText().toString())) ) {
-                tag2Include = true;
+            for (String value: currentPhoto.valuesWithKey(searchTag2.getSelectedItem().toString())){
+                if (value.startsWith(searchVal2.getText().toString().trim())) {
+                    tag2Include = true;
+                    break;
+                }
             }
         }
 
-        if (toggleValue == null) {
+        if (toggleValue == null)
             return tag1Include;
-        } else if (toggleValue.equals(andChoice.getText())) {
+        else if (toggleValue.equals(andChoice.getText().toString()))
             return tag1Include && tag2Include;
-        } else if (toggleValue.equals(orChoice.getText())) {
+        else if (toggleValue.equals(orChoice.getText().toString()))
             return tag1Include || tag2Include;
-        }
 
         return false;
     }
@@ -264,7 +262,5 @@ public class SearchActivity extends AppCompatActivity {
         return false;
     }
 
-    public void backOnClick(View view){
-        finish();
-    }
+    public void backOnClick(View view){ finish(); }
 }
