@@ -18,17 +18,19 @@ public class Photo implements Serializable {
         this.uri = uri.toString();
         file = new File(uri.getPath());
         name = file.getName();
-        //System.out.println(getUriString() +" asdf "+ uri.getPath() +" asdf "+ uri.getLastPathSegment() + " asdf ");
         tags = new ArrayList<>();
     }
 
+    /*
     @Override
     public boolean equals(Object obj) {
+
         if (!(obj instanceof Photo))
             return false;
 
         return file.equals(((Photo) obj).getFile());
     }
+     */
 
     public List<String> valuesWithKey(String filterKey){
 
