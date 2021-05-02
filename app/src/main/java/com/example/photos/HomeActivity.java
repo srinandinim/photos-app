@@ -12,12 +12,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.ArrayList;
 
 import adapters.AlbumsAdapter;
 import models.Album;
@@ -25,22 +19,19 @@ import models.User;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private static final String storeDir = "../../res" + File.separator + "raw";
-    private static final String storeFile = "SerializedData.dat";
-
-    // private final String pathToAppFolder = getExternalFilesDir(null).getAbsolutePath();
-    // private final String filePath = pathToAppFolder + File.separator  + "list.ser";
-
     GridView albumGrid;
-
     AlbumsAdapter albumsAdapter;
+
+    public static File filesDir;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        // deserialize();
+        filesDir = getFilesDir();
+
+        User.deserialize();
 
         albumGrid = findViewById(R.id.albumGrid);
         albumsAdapter = new AlbumsAdapter(this);
@@ -50,9 +41,13 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
         albumsAdapter.notifyDataSetChanged();
+    }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        User.serialize();
     }
 
     public void searchOnClick(View view) {
@@ -63,15 +58,14 @@ public class HomeActivity extends AppCompatActivity {
         final EditText input = new EditText(this);
 
         AlertDialog dialog = (new AlertDialog.Builder(this))
-                .setTitle("Create New Album")
-                .setMessage("\nAlbum Name:")
+                .setTitle("Create New Album").setMessage("\nAlbum Name:")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         if (!containsAlbum(input.getText().toString().trim())) {
                             User.albumList.add(new Album(input.getText().toString()));
                             albumsAdapter.notifyDataSetChanged();
-                            //serialize();
+                            User.serialize();
                         } else {
                             Toast.makeText(HomeActivity.this, "Invalid Album Name", Toast.LENGTH_SHORT).show();
                         }
@@ -96,30 +90,6 @@ public class HomeActivity extends AppCompatActivity {
         return false;
     }
 
-    /*
 
-    public void serialize() {
-        try {
-            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(storeDir + File.separator + storeFile));
-            // System.out.println(filePath);
-            oos.writeObject(albumList);
-            oos.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void deserialize() {
-        try {
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(storeDir + File.separator + storeFile));
-            albumList = (ArrayList<Album>) ois.readObject();
-            ois.close();
-        } catch (ClassNotFoundException | IOException e) {
-            e.printStackTrace();
-            albumList = new ArrayList<>();
-        }
-
-    }
-    */
 
 }

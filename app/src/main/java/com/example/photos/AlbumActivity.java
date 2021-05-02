@@ -46,8 +46,13 @@ public class AlbumActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
         photosAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        User.serialize();
     }
 
     public void addPhotoOnClick(View view) {
@@ -64,6 +69,7 @@ public class AlbumActivity extends AppCompatActivity {
         if (resultCode == Activity.RESULT_OK && requestCode == PICK_IMAGE) {
             currentAlbum.addPhoto(new Photo(data.getData()));
             photosAdapter.notifyDataSetChanged();
+            User.serialize();
         }
 
     }

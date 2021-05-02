@@ -62,8 +62,7 @@ public class AlbumsAdapter extends BaseAdapter { //HomeActivity Grid view
         ImageButton delete = convertView.findViewById(R.id.albumDelete);
 
         if (album.getSize() == 0) {
-            albumCover.setImageResource(R.drawable.noimageavailable);
-            //TODO: fix image scaling
+            albumCover.setImageResource(R.drawable.noimageavailable); //TODO: fix image scaling
         } else {
             albumCover.setImageURI(Uri.parse(album.getPhotoList().get(0).getUriString()));
         }
@@ -71,7 +70,7 @@ public class AlbumsAdapter extends BaseAdapter { //HomeActivity Grid view
         albumCover.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                User.setCurrentAlbum(album);
+                User.currentAlbum = album;
                 mContext.startActivity(new Intent(mContext, AlbumActivity.class));
             }
         });
@@ -92,6 +91,7 @@ public class AlbumsAdapter extends BaseAdapter { //HomeActivity Grid view
                                 if (!containsAlbum(input.getText().toString().trim())) {
                                     album.setName(input.getText().toString());
                                     notifyDataSetChanged();
+                                    User.serialize();
                                 } else {
                                     Toast.makeText(mContext, "Invalid Album Name", Toast.LENGTH_SHORT).show();
                                 }
@@ -111,6 +111,7 @@ public class AlbumsAdapter extends BaseAdapter { //HomeActivity Grid view
             public void onClick(View view) {
                 User.albumList.remove(arrPosition);
                 notifyDataSetChanged();
+                User.serialize();
             }
         });
 

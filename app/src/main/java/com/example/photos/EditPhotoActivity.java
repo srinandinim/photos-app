@@ -93,7 +93,12 @@ public class EditPhotoActivity extends AppCompatActivity {
             public void afterTextChanged(Editable editable) { }
         });
 
+    }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        User.serialize();
     }
 
     public void moveOnClick(View view) {
@@ -117,6 +122,7 @@ public class EditPhotoActivity extends AppCompatActivity {
                 pickedAlbum.addPhoto(currentPhoto);
                 parentAlbum = pickedAlbum;
                 Toast.makeText(EditPhotoActivity.this, "Moved photo to: "+ parentAlbum.getName(), Toast.LENGTH_SHORT).show();
+                User.serialize();
                 return true;
             }
         });
@@ -133,15 +139,11 @@ public class EditPhotoActivity extends AppCompatActivity {
         String chosenValue = tagValue.getText().toString();
 
         boolean success = currentPhoto.addTag(chosenTag, chosenValue);
-        if (!success) {
-            AlertDialog dialog = (new AlertDialog.Builder(this))
-                    .setTitle("Add New Tag Error")
-                    .setMessage("\nThat tag is not available.")
-                    .setPositiveButton("OK", null)
-                    .create();
-            dialog.show();
-        } else {
+        if (success) {
             tagAdapter.notifyDataSetChanged();
+            User.serialize();
+        } else {
+            Toast.makeText(EditPhotoActivity.this, "Add New Tag Error\nThat tag is not available.", Toast.LENGTH_SHORT).show();
         }
 
         tagType.clearCheck();

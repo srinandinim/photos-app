@@ -76,6 +76,7 @@ public class PhotosAdapter extends BaseAdapter { //album view gridview
             public void onClick(View view) {
                 photos.remove(arrPosition);
                 notifyDataSetChanged();
+                User.serialize();
             }
         });
 

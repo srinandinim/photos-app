@@ -13,6 +13,7 @@ import com.example.photos.R;
 import java.util.List;
 
 import models.Tag;
+import models.User;
 
 public class TagAdapter extends ArrayAdapter<Tag> {
 
@@ -47,6 +48,7 @@ public class TagAdapter extends ArrayAdapter<Tag> {
             public void onClick(View view) {
                 tags.remove(arrPosition);
                 notifyDataSetChanged();
+                User.serialize();
             }
         });
 
