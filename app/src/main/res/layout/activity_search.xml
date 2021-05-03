@@ -113,8 +113,14 @@
 
     <GridView
         android:id="@+id/searchGrid"
-        android:layout_width="388dp"
+        android:layout_width="360dp"
         android:layout_height="277dp"
+        android:columnWidth="100dp"
+        android:gravity="center"
+        android:horizontalSpacing="10dp"
+        android:numColumns="auto_fit"
+        android:stretchMode="spacingWidthUniform"
+        android:verticalSpacing="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.478"

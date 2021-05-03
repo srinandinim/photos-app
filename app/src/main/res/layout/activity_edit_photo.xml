@@ -11,6 +11,7 @@
         android:id="@+id/photoPicture"
         android:layout_width="125dp"
         android:layout_height="125dp"
+        android:foregroundGravity="center_vertical|center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.072"
@@ -21,15 +22,16 @@
 
     <TextView
         android:id="@+id/photoName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="125dp"
+        android:layout_height="50dp"
         android:gravity="center"
         android:text="TextView"
         app:layout_constraintBottom_toTopOf="@+id/movePhoto"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.153"
+        app:layout_constraintHorizontal_bias="0.063"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/photoPicture" />
+        app:layout_constraintTop_toBottomOf="@+id/photoPicture"
+        app:layout_constraintVertical_bias="0.454" />
 
     <Button
         android:id="@+id/movePhoto"
@@ -39,15 +41,15 @@
         android:text="Move"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.072"
+        app:layout_constraintHorizontal_bias="0.066"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.379" />
+        app:layout_constraintVertical_bias="0.423" />
 
     <ListView
         android:id="@+id/tagList"
-        android:layout_width="234dp"
-        android:layout_height="242dp"
+        android:layout_width="233dp"
+        android:layout_height="266dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.909"
