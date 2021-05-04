@@ -18,9 +18,6 @@ import android.widget.Toast;
 import com.example.photos.AlbumActivity;
 import com.example.photos.R;
 
-import java.io.Serializable;
-import java.util.List;
-
 import models.Album;
 import models.User;
 
@@ -88,7 +85,7 @@ public class AlbumsAdapter extends BaseAdapter { //HomeActivity Grid view
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                if (!containsAlbum(input.getText().toString().trim())) {
+                                if (!containsAlbum(input.getText().toString().trim()) || (input.getText().toString().toLowerCase().equals(album.getName().toLowerCase()))) {
                                     album.setName(input.getText().toString());
                                     notifyDataSetChanged();
                                     User.serialize();

@@ -1,7 +1,5 @@
 package com.example.photos;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,7 +11,6 @@ import android.widget.GridView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -190,7 +187,7 @@ public class SearchActivity extends AppCompatActivity {
         boolean tag2Include = false;
 
         for (String value: currentPhoto.valuesWithKey(searchTag1.getSelectedItem().toString())){
-            if (value.startsWith(searchVal1.getText().toString().trim())) {
+            if (value.toLowerCase().startsWith(searchVal1.getText().toString().trim().toLowerCase())) {
                 tag1Include = true;
                 break;
             }
@@ -202,7 +199,7 @@ public class SearchActivity extends AppCompatActivity {
             toggleValue = chosenTagButton.getText().toString();
 
             for (String value: currentPhoto.valuesWithKey(searchTag2.getSelectedItem().toString())){
-                if (value.startsWith(searchVal2.getText().toString().trim())) {
+                if (value.toLowerCase().startsWith(searchVal2.getText().toString().trim().toLowerCase())) {
                     tag2Include = true;
                     break;
                 }
