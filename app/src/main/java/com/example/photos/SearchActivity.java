@@ -11,6 +11,7 @@ import android.widget.GridView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -176,6 +177,10 @@ public class SearchActivity extends AppCompatActivity {
 
         SearchPhotosAdapter searchPhotosAdapter = new SearchPhotosAdapter(this, searchResults);
         searchGrid.setAdapter(searchPhotosAdapter);
+
+        if (searchResults.size() == 0){
+            Toast.makeText(SearchActivity.this, "No results found.", Toast.LENGTH_SHORT).show();
+        }
 
         //createAlbum.setEnabled(searchResults.size() != 0);
     }
